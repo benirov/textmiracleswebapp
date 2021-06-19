@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+
+import Header from './components/Header'
+import Spinner from './components/Spinner'
+import TextxList from './components/TextxList'
+import ModalInformacion from './components/ModalInformacion'
+import BotonCargar from './components/BotonCargarMas'
+
+import TextoState from './context/TextoState'
 
 function App() {
+
+  useEffect(() => {
+
+    if(localStorage.getItem('dark-mode') === 'true'){
+        document.body.classList.toggle('dark');
+    }
+    // eslint-disable-next-line
+  },[]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TextoState>
+        <Header />
+        <Spinner />
+        <section className="page-section portfolio" id="portfolio">
+            <div className="content-wrapper">
+                <TextxList />
+            </div>
+        </section>
+        <ModalInformacion />
+        <BotonCargar />
+    </TextoState>
+    
   );
 }
 
